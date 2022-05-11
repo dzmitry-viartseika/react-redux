@@ -1,5 +1,5 @@
 import TheHeader from "../components/TheHeader/TheHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { UserActions } from "../model/model";
 import {useTypedSelector} from "../hooks/useTypedSelector";
@@ -12,8 +12,9 @@ function SharedLayout(): JSX.Element {
     const { setUsers } = useActions();
     const dispatch = useDispatch();
 
-    const handleValue = (e: any) => {
-        setValue(e.target.value);
+    const handleValue = (e: ChangeEvent<HTMLInputElement>): void => {
+        const { target: { value } } = e;
+        setValue(value);
     }
 
     const addNewUser = () => {
