@@ -1,4 +1,4 @@
-import { IUserAction, IUserState, UserActions } from "../../model/model";
+import { IUserAction, IUserState, UserActions } from "../../model/users/users";
 
 const initialState: IUserState = {
     users: [],

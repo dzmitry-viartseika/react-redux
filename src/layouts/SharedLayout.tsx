@@ -1,7 +1,7 @@
 import TheHeader from "../components/TheHeader/TheHeader";
 import { useEffect, useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { UserActions } from "../model/model";
+import { UserActions } from "../model/users/users";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 

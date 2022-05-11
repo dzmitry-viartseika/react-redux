@@ -1,4 +1,4 @@
-import {UserActions, IUserAction, IUser, ServerResponse} from "../../model/model";
+import {UserActions, IUserAction, IUser, ServerResponse} from "../../model/users/users";
 import {Dispatch} from 'redux';
 import axios from 'axios';
 
