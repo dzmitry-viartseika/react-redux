@@ -1,27 +1,26 @@
 import {
-    GET_USERS,
+    ADD_USER,
     SET_USERS,
 } from '../../constants/redux-types';
 
 const initialState = {
-    users: [1,2,3],
+    users: [],
 };
 
 export const UsersReducer = (state = initialState, action: any) => {
     const { payload, type } = action;
     switch (type) {
-        case SET_USERS:
-            console.log('payload', payload);
+        case ADD_USER:
             return {
                 ...state,
                 users: payload,
             }
-        case GET_USERS:
+        case SET_USERS:
             return {
                 ...state,
+                users: payload,
             }
         default:
-            new Error(`Dont Found ${type} action`);
             return state;
     }
 }

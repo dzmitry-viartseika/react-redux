@@ -123,7 +123,9 @@ const initialState: UserState = {
 
 function SharedLayout(): JSX.Element {
     const [value, setValue] = useState<string>('');
+
     const dispatch = useDispatch();
+
     const { users } = useSelector((state: RootStateOrAny) => {
         return state.users;
     });
@@ -134,13 +136,24 @@ function SharedLayout(): JSX.Element {
 
     const addNewUser = () => {
         console.log('addNewUser');
-        const newArray = [...users, value];
+        const newArray = [...users, +value];
         dispatch({
-            type: 'SET_USERS',
+            type: 'ADD_USER',
             payload: newArray,
         })
         setValue('');
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log('api requiest :D');
+            const response = [...users, 5,6,7,8,9];
+            dispatch({
+                type: 'SET_USERS11',
+                payload: response,
+            })
+        }, 3000)
+    }, []);
 
     // const [state, dispatch] = useReducer(reducer, initialState);
     // const [userName, setUserName] = useState<string>('');
