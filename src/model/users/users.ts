@@ -10,7 +10,7 @@ export interface ServerResponse {
 }
 
 export interface ServerData {
-    users: any[]
+    users: IUser[]
 }
 
 export interface IUserState {
