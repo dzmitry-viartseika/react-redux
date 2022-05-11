@@ -139,21 +139,13 @@ function SharedLayout(): JSX.Element {
         const newArray = [...users, +value];
         dispatch({
             type: 'ADD_USER',
-            payload: newArray,
+            payload: {
+                id: value,
+                name: 'wertey'
+            },
         })
         setValue('');
     }
-
-    useEffect(() => {
-        setTimeout(() => {
-            console.log('api requiest :D');
-            const response = [...users, 5,6,7,8,9];
-            dispatch({
-                type: 'SET_USERS11',
-                payload: response,
-            })
-        }, 3000)
-    }, []);
 
     // const [state, dispatch] = useReducer(reducer, initialState);
     // const [userName, setUserName] = useState<string>('');
@@ -248,28 +240,29 @@ function SharedLayout(): JSX.Element {
     //
     // }, []);
     //
-    // useEffect(() => {
-    //     axios.get(`https://jsonplaceholder.typicode.com/users`)
-    //         .then((response) => {
-    //             dispatch({
-    //                 type: UsersActions.GET_USERS_LIST,
-    //                 payload: response.data,
-    //             });
-    //     })
-    // }, [])
+    useEffect(() => {
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+            .then((response) => {
+                const { data } = response;
+                dispatch({
+                    type: 'SET_USERS',
+                    payload: data,
+                });
+        })
+    }, [])
 
     return (
         <>
             <TheHeader />
             value={value}
             <input type="text" value={value} onChange={handleValue}/>
-            {
-                users.map((user: any) => (
-                    <div key={user}>
-                        user={user}
+            <div>
+                { !users.length ? <h1>Клиенты отсутствуют</h1> : users.map((user: any) => (
+                    <div key={user.id}>
+                        user={user.name}
                     </div>
-                ))
-            }
+                ))}
+            </div>
             <button onClick={addNewUser}>Add User</button>
             {/*<input type="text" value={userName} onChange={changeValue}/>*/}
             {/*<br/>*/}

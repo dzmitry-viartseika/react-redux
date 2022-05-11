@@ -13,12 +13,12 @@ export const UsersReducer = (state = initialState, action: any) => {
         case ADD_USER:
             return {
                 ...state,
-                users: payload,
+                users: [...state.users, payload],
             }
         case SET_USERS:
             return {
                 ...state,
-                users: payload,
+                users: [...state.users, ...payload],
             }
         default:
             return state;
