@@ -19,6 +19,18 @@ export const UsersReducer = (state = initialState, action: IUserAction): IUserSt
                 ...state,
                 users: [...state.users, ...payload],
             }
+        case UserActions.FETCH_USERS_SUCCESS:
+            return {
+                loading: false,
+                error: null,
+                users: action.payload
+            }
+        case UserActions.FETCH_USERS_ERROR:
+            return {
+                loading: false,
+                error: action.payload,
+                users: []
+            }
         default:
             console.error(`Unhandled action type ${action.type}`);
             return state;

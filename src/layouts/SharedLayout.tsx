@@ -5,12 +5,13 @@ import axios from 'axios';
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 import { UserActions } from "../model/model";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
 
 
 function SharedLayout(): JSX.Element {
     const [value, setValue] = useState<string>('');
     const { users, error, loading } = useTypedSelector(state => state.users);
-
+    const { setUsers } = useActions();
     const dispatch = useDispatch();
 
     const handleValue = (e: any) => {
@@ -18,7 +19,6 @@ function SharedLayout(): JSX.Element {
     }
 
     const addNewUser = () => {
-        console.log('addNewUser');
         dispatch({
             type: UserActions.ADD_USER,
             payload: {
@@ -30,21 +30,22 @@ function SharedLayout(): JSX.Element {
     }
 
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
-            .then((response) => {
-                const { data } = response;
-                dispatch({
-                    type: UserActions.SET_USERS,
-                    payload: data.map((item: any) => {
-                        const userObj = {
-                            id: item.id,
-                            name: item.name
-                        }
-
-                        return userObj;
-                    }),
-                });
-        })
+        setUsers()
+        // axios.get(`https://jsonplaceholder.typicode.com/users`)
+        //     .then((response) => {
+        //         const { data } = response;
+        //         dispatch({
+        //             type: UserActions.SET_USERS,
+        //             payload: data.map((item: any) => {
+        //                 const userObj = {
+        //                     id: item.id,
+        //                     name: item.name
+        //                 }
+        //
+        //                 return userObj;
+        //             }),
+        //         });
+        // })
     }, [])
 
     return (

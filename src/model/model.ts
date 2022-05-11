@@ -1,6 +1,16 @@
 export enum UserActions {
     ADD_USER,
     SET_USERS,
+    FETCH_USERS_SUCCESS,
+    FETCH_USERS_ERROR,
+}
+
+export interface ServerResponse {
+    data: ServerData
+}
+
+export interface ServerData {
+    users: any[]
 }
 
 export interface IUserState {
@@ -29,4 +39,13 @@ export interface IUserAction {
     payload?: any;
 }
 
-export type UserAction = IAddUserAction | ISetUsersAction;
+interface FetchUsersSuccessAction {
+    type: UserActions.FETCH_USERS_SUCCESS;
+    payload: IUser[]
+}
+interface FetchUsersErrorAction {
+    type: UserActions.FETCH_USERS_ERROR;
+    payload: string;
+}
+
+export type UserAction = IAddUserAction | ISetUsersAction | FetchUsersSuccessAction | FetchUsersErrorAction;
