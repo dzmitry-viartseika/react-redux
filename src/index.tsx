@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import SharedLayout from "./layouts/SharedLayout";
 import './assets/scss/style.scss';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import store from './store/store';
 
 ReactDOM.render(
     <React.StrictMode>

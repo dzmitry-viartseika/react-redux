@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import TheHeader from "../components/TheHeader/TheHeader";
 import {useEffect, useState, useReducer, Reducer} from "react";
 import axios from 'axios';
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
 
 enum UsersActions {
     ADD_NEW_USER = 'ADD_NEW_USER',
@@ -121,135 +122,165 @@ const initialState: UserState = {
 }
 
 function SharedLayout(): JSX.Element {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const [userName, setUserName] = useState<string>('');
-    const changeValue = (event: any): void => {
-        setUserName(event.target.value);
+    const [value, setValue] = useState<string>('');
+    const dispatch = useDispatch();
+    const { users } = useSelector((state: RootStateOrAny) => {
+        return state.users;
+    });
+
+    const handleValue = (e: any) => {
+        setValue(e.target.value);
     }
 
     const addNewUser = () => {
-        const newUser = {
-            "id": 11,
-            "name": userName,
-            "username": "Kamren",
-            "email": "Lucio_Hettinger@annie.ca",
-            "address": {
-                "street": "Skiles Walks",
-                "suite": "Suite 351",
-                "city": "Roscoeview",
-                "zipcode": "33263",
-                "geo": {
-                    "lat": "-31.8129",
-                    "lng": "62.5342"
-                }
-            },
-            "phone": "(254)954-1289",
-            "website": "demarco.info",
-            "company": {
-                "name": "Keebler LLC",
-                "catchPhrase": "User-centric fault-tolerant solution",
-                "bs": "revolutionize end-to-end systems"
-            }
-        };
-        const newArray = [...state.usersList, newUser];
+        console.log('addNewUser');
+        const newArray = [...users, value];
         dispatch({
-            type: UsersActions.ADD_NEW_USER,
-            payload: newArray
+            type: 'SET_USERS',
+            payload: newArray,
         })
+        setValue('');
     }
 
-    const updateConditional = () => {
-        dispatch({
-            type: UsersActions.CHANGE_CONDITIONAL,
-            payload: !state.conditional,
-        })
-    };
-
-    const changePost = async () => {
-        try {
-            const { data } = await postRequest(5);
-            dispatch({
-                type: UsersActions.CHANGE_POST,
-                payload: data,
-            })
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
-
-    const deleteUser = (userId: number) => {
-        const { usersList } = state;
-        if (usersList.length) {
-            const filteredUsers = usersList.filter((item: any) => item.id !== userId);
-            console.log('filteredUsers', filteredUsers);
-            dispatch({
-                type: UsersActions.REMOVE_USER,
-                payload: filteredUsers,
-            })
-        }
-
-    }
-
-    const postRequest = async (post = 1): Promise<ResponseUserPost> => {
-        return await axios.get(`https://jsonplaceholder.typicode.com/posts/${post}`);
-    }
-
-    useEffect(() => {
-        console.log('useEffect')
-        const fetchData = async () => {
-            try {
-                const response = await postRequest();
-                const { data } = response;
-                dispatch({
-                    type: UsersActions.GET_POST,
-                    payload: data,
-                });
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        fetchData().catch(console.error);
-
-    }, []);
-
-    useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
-            .then((response) => {
-                dispatch({
-                    type: UsersActions.GET_USERS_LIST,
-                    payload: response.data,
-                });
-        })
-    }, [])
+    // const [state, dispatch] = useReducer(reducer, initialState);
+    // const [userName, setUserName] = useState<string>('');
+    // const changeValue = (event: any): void => {
+    //     setUserName(event.target.value);
+    // }
+    //
+    // const addNewUser = () => {
+    //     const newUser = {
+    //         "id": 11,
+    //         "name": userName,
+    //         "username": "Kamren",
+    //         "email": "Lucio_Hettinger@annie.ca",
+    //         "address": {
+    //             "street": "Skiles Walks",
+    //             "suite": "Suite 351",
+    //             "city": "Roscoeview",
+    //             "zipcode": "33263",
+    //             "geo": {
+    //                 "lat": "-31.8129",
+    //                 "lng": "62.5342"
+    //             }
+    //         },
+    //         "phone": "(254)954-1289",
+    //         "website": "demarco.info",
+    //         "company": {
+    //             "name": "Keebler LLC",
+    //             "catchPhrase": "User-centric fault-tolerant solution",
+    //             "bs": "revolutionize end-to-end systems"
+    //         }
+    //     };
+    //     const newArray = [...state.usersList, newUser];
+    //     dispatch({
+    //         type: UsersActions.ADD_NEW_USER,
+    //         payload: newArray
+    //     })
+    // }
+    //
+    // const updateConditional = () => {
+    //     dispatch({
+    //         type: UsersActions.CHANGE_CONDITIONAL,
+    //         payload: !state.conditional,
+    //     })
+    // };
+    //
+    // const changePost = async () => {
+    //     try {
+    //         const { data } = await postRequest(5);
+    //         dispatch({
+    //             type: UsersActions.CHANGE_POST,
+    //             payload: data,
+    //         })
+    //     }
+    //     catch (e) {
+    //         console.error(e);
+    //     }
+    // }
+    //
+    // const deleteUser = (userId: number) => {
+    //     const { usersList } = state;
+    //     if (usersList.length) {
+    //         const filteredUsers = usersList.filter((item: any) => item.id !== userId);
+    //         console.log('filteredUsers', filteredUsers);
+    //         dispatch({
+    //             type: UsersActions.REMOVE_USER,
+    //             payload: filteredUsers,
+    //         })
+    //     }
+    //
+    // }
+    //
+    // const postRequest = async (post = 1): Promise<ResponseUserPost> => {
+    //     return await axios.get(`https://jsonplaceholder.typicode.com/posts/${post}`);
+    // }
+    //
+    // useEffect(() => {
+    //     console.log('useEffect')
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await postRequest();
+    //             const { data } = response;
+    //             dispatch({
+    //                 type: UsersActions.GET_POST,
+    //                 payload: data,
+    //             });
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     }
+    //
+    //     fetchData().catch(console.error);
+    //
+    // }, []);
+    //
+    // useEffect(() => {
+    //     axios.get(`https://jsonplaceholder.typicode.com/users`)
+    //         .then((response) => {
+    //             dispatch({
+    //                 type: UsersActions.GET_USERS_LIST,
+    //                 payload: response.data,
+    //             });
+    //     })
+    // }, [])
 
     return (
         <>
             <TheHeader />
-            <input type="text" value={userName} onChange={changeValue}/>
-            <br/>
-            <button onClick={addNewUser} disabled={!userName}>Add New User</button>
+            value={value}
+            <input type="text" value={value} onChange={handleValue}/>
             {
-                state.usersList.map((item: any) => (
-                    <div key={item.id}>
-                        <h1>{item.name}</h1>
-                        <div>
-                            <button onClick={() => deleteUser(item.id)}>Remove User</button>
-                        </div>
+                users.map((user: any) => (
+                    <div key={user}>
+                        user={user}
                     </div>
                 ))
             }
-            <br/>
-            <button onClick={updateConditional}>Update conditional</button>
-            <br/>
-            <button onClick={changePost}>change Post</button>
-            {state.post ? <h1>{ state.post.body }</h1> : null}
-            <br/>
-            conditional={state.conditional ? <small>True</small> : <small>False</small>}
-            <section className='section'>
-                <Outlet />
-            </section>
+            <button onClick={addNewUser}>Add User</button>
+            {/*<input type="text" value={userName} onChange={changeValue}/>*/}
+            {/*<br/>*/}
+            {/*<button onClick={addNewUser} disabled={!userName}>Add New User</button>*/}
+            {/*{*/}
+            {/*    state.usersList.map((item: any) => (*/}
+            {/*        <div key={item.id}>*/}
+            {/*            <h1>{item.name}</h1>*/}
+            {/*            <div>*/}
+            {/*                <button onClick={() => deleteUser(item.id)}>Remove User</button>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    ))*/}
+            {/*}*/}
+            {/*<br/>*/}
+            {/*<button onClick={updateConditional}>Update conditional</button>*/}
+            {/*<br/>*/}
+            {/*<button onClick={changePost}>change Post</button>*/}
+            {/*{state.post ? <h1>{ state.post.body }</h1> : null}*/}
+            {/*<br/>*/}
+            {/*conditional={state.conditional ? <small>True</small> : <small>False</small>}*/}
+            {/*<section className='section'>*/}
+            {/*    <Outlet />*/}
+            {/*</section>*/}
         </>
     )
 }

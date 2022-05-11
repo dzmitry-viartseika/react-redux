@@ -4,16 +4,17 @@ import {
 } from '../../constants/redux-types';
 
 const initialState = {
-    users: 0,
+    users: [1,2,3],
 };
 
 export const UsersReducer = (state = initialState, action: any) => {
     const { payload, type } = action;
     switch (type) {
         case SET_USERS:
+            console.log('payload', payload);
             return {
                 ...state,
-                users: state.users + payload,
+                users: payload,
             }
         case GET_USERS:
             return {

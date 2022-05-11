@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import { UsersReducer } from "../reducers/UsersReducer";
+import { UsersReducer } from '../reducers/UsersReducer';
 
-const rootReducer = combineReducers({
-    users: UsersReducer,
+export const rootReducer = combineReducers({
+    users: UsersReducer
 });
 
-export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>
+
