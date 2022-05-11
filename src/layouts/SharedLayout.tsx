@@ -1,8 +1,6 @@
-import { Outlet } from 'react-router-dom';
 import TheHeader from "../components/TheHeader/TheHeader";
-import {useEffect, useState, useReducer, Reducer} from "react";
-import axios from 'axios';
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { UserActions } from "../model/model";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
