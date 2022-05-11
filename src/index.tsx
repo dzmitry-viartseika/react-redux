@@ -9,26 +9,30 @@ import SinglePostPage from './pages/SinglePostPage';
 import ErrorPage from "./pages/ErrorPage";
 import SharedLayout from "./layouts/SharedLayout";
 import './assets/scss/style.scss';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<SharedLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='/users' element={<UsersPage />} />
-                    <Route path='/posts' element={<PostsPage />} />
-                    <Route
-                        path='/posts/:postId'
-                        element={<SinglePostPage />}
-                    />
-                    <Route path='*' element={<ErrorPage />} />
-                </Route>
-                // Nested routes
-                <Route path='/dashboard' element={<DashboardPage />}>
-                    <Route path='stats' element={<div>stats</div>} />
-                </Route>
-            </Routes>
+            <Provider store={store}>
+                <Routes>
+                    <Route path='/' element={<SharedLayout />}>
+                        <Route index element={<HomePage />} />
+                        <Route path='/users' element={<UsersPage />} />
+                        <Route path='/posts' element={<PostsPage />} />
+                        <Route
+                            path='/posts/:postId'
+                            element={<SinglePostPage />}
+                        />
+                        <Route path='*' element={<ErrorPage />} />
+                    </Route>
+                    // Nested routes
+                    <Route path='/dashboard' element={<DashboardPage />}>
+                        <Route path='stats' element={<div>stats</div>} />
+                    </Route>
+                </Routes>
+            </Provider>
         </BrowserRouter>
     </React.StrictMode>,
 document.getElementById('root'),
