@@ -1,4 +1,4 @@
-import * as UserActionCreators from './UsersActions'
+import * as UserActionCreators from './users/UsersActions'
 
 export default {
     ...UserActionCreators

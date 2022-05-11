@@ -1,4 +1,4 @@
-import { IUserAction, IUserState, UserActions } from "../../model/users/users";
+import { IUserAction, IUserState, UserActions } from "../../../model/users/users";
 
 const initialState: IUserState = {
     users: [],
@@ -6,7 +6,7 @@ const initialState: IUserState = {
     error: null
 };
 
-export const UsersReducer = (state = initialState, action: IUserAction): IUserState => {
+export const TodosReducer = (state = initialState, action: IUserAction): IUserState => {
     const { payload, type } = action;
     switch (type) {
         case UserActions.ADD_USER:
