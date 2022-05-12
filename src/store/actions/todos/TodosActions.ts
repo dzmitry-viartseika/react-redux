@@ -1,24 +1,16 @@
-import {UserActions, IUserAction, IUser, ServerResponse} from "../../../model/users/users";
+import {ITodosAction, TodosActions, ITodo, ServerResponse} from "../../../model/todos/todos";
 import {Dispatch} from 'redux';
 import axios from 'axios';
 
-export function setUsers() {
-    return async (dispatch: Dispatch<IUserAction>) => {
+export function setTodos() {
+    return async (dispatch: Dispatch<ITodosAction>) => {
         try {
-            axios.get<ServerResponse>(`https://jsonplaceholder.typicode.com/users`)
+            axios.get<ServerResponse>(`https://jsonplaceholder.typicode.com/users/1/todos`)
                 .then((response) => {
                 if (Array.isArray(response.data)) {
-                    const modifiedArray = response.data.map((item: any) => {
-                        const userObj = {
-                            id: item.id,
-                            name: item.name
-                        }
-
-                        return userObj;
-                    })
                     dispatch({
-                        type: UserActions.SET_USERS,
-                        payload: modifiedArray,
+                        type: TodosActions.SET_TODOS,
+                        payload: response.data,
                     })
                 }
 
@@ -26,20 +18,16 @@ export function setUsers() {
         } catch (e) {
             console.error(e);
             dispatch({
-                type: UserActions.FETCH_USERS_ERROR,
+                type: TodosActions.FETCH_TODOS_ERROR,
                 payload: 'Произошла ошибка при загрузке пользователей'
             })
         }
     }
-    // return {
-    //     type: UserActions.SET_USERS,
-    //     payload: users
-    // }
 }
 
-export function getAllUsers(users: IUser) {
+export function getAllTodos(todos: ITodo) {
     return {
-        type: UserActions.ADD_USER,
-        payload: users
+        type: TodosActions.ADD_TODO,
+        payload: todos
     }
 }

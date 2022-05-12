@@ -1,38 +1,41 @@
-import { IUserAction, IUserState, UserActions } from "../../../model/users/users";
+import {TodosActions, ITodosState, TodosAction} from "../../../model/todos/todos";
 
-const initialState: IUserState = {
-    users: [],
+const initialState: ITodosState = {
+    todos: [],
+    todo: {},
     loading: false,
     error: null
 };
 
-export const TodosReducer = (state = initialState, action: IUserAction): IUserState => {
+export const TodosReducer = (state = initialState, action: TodosAction): ITodosState => {
     const { payload, type } = action;
     switch (type) {
-        case UserActions.ADD_USER:
+        case TodosActions.ADD_TODO:
             return {
                 ...state,
-                users: [...state.users, payload],
+                todos: [...state.todos, payload],
             }
-        case UserActions.SET_USERS:
+        case TodosActions.SET_TODOS:
             return {
                 ...state,
-                users: [...state.users, ...payload],
+                todos: [...state.todos, ...payload],
             }
-        case UserActions.FETCH_USERS_SUCCESS:
+        case TodosActions.FETCH_TODOS_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 error: null,
-                users: action.payload
+                todos: action.payload,
             }
-        case UserActions.FETCH_USERS_ERROR:
+        case TodosActions.FETCH_TODOS_ERROR:
             return {
+                ...state,
                 loading: false,
                 error: action.payload,
-                users: []
+                todos: [],
             }
         default:
-            console.error(`Unhandled action type ${action.type}`);
+            console.error(`Unhandled action type ${type}`);
             return state;
     }
 }

@@ -10,16 +10,17 @@ export interface ServerResponse {
 }
 
 export interface ServerData {
-    todos: ITodos[]
+    todos: ITodo[]
 }
 
 export interface ITodosState {
     todos: any[];
+    todo: any;
     loading: boolean;
     error: null | string;
 }
 
-export interface ITodos {
+export interface ITodo {
     userId: number,
     id: number;
     title: string;
@@ -28,12 +29,12 @@ export interface ITodos {
 
 interface IAddTodosAction {
     type: TodosActions.ADD_TODO;
-    payload: ITodos;
+    payload: ITodo;
 }
 
 interface ISetTodosAction {
     type: TodosActions.SET_TODOS;
-    payload: ITodos[];
+    payload: ITodo[];
 }
 
 export interface ITodosAction {
@@ -43,7 +44,7 @@ export interface ITodosAction {
 
 interface FetchTodosSuccessAction {
     type: TodosActions.FETCH_TODOS_SUCCESS;
-    payload: ITodos[]
+    payload: ITodo[]
 }
 interface FetchTodosErrorAction {
     type: TodosActions.FETCH_TODOS_ERROR;

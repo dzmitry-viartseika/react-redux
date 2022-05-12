@@ -8,6 +8,7 @@ function HomePage(): JSX.Element {
             <Link to='/users' className='btn'>
                 Users
             </Link>
+            <h1>Home Page</h1>
             <Outlet />
         </>
     )

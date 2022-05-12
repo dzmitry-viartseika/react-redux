@@ -1,7 +1,7 @@
 function PostsPage(): JSX.Element {
     return (
         <div>
-            PostsList
+            <h1>Posts</h1>
         </div>
     )
 }
