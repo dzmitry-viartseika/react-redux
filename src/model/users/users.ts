@@ -1,8 +1,8 @@
 export enum UserActions {
-    ADD_USER,
-    SET_USERS,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_ERROR,
+    ADD_USER = 'add_user',
+    SET_USERS = 'set_users',
+    FETCH_USERS_SUCCESS = 'fetch_users_success',
+    FETCH_USERS_ERROR = 'fetch_users_error',
 }
 
 export interface ServerResponse {
@@ -35,7 +35,7 @@ interface ISetUsersAction {
 }
 
 export interface IUserAction {
-    type: number;
+    type: string;
     payload?: any;
 }
 

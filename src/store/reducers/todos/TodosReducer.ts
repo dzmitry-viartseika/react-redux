@@ -2,7 +2,6 @@ import {TodosActions, ITodosState, TodosAction} from "../../../model/todos/todos
 
 const initialState: ITodosState = {
     todos: [],
-    todo: {},
     loading: false,
     error: null
 };
@@ -16,22 +15,24 @@ export const TodosReducer = (state = initialState, action: TodosAction): ITodosS
                 todos: [...state.todos, payload],
             }
         case TodosActions.SET_TODOS:
+            console.log('SET_TODOS', payload);
             return {
                 ...state,
-                todos: [...state.todos, ...payload],
+                todos: payload,
+                loading: true,
             }
         case TodosActions.FETCH_TODOS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                todos: action.payload,
+                todos: payload,
             }
         case TodosActions.FETCH_TODOS_ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
+                error: payload,
                 todos: [],
             }
         default:

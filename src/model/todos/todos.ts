@@ -1,8 +1,8 @@
 export enum TodosActions {
-    ADD_TODO,
-    SET_TODOS,
-    FETCH_TODOS_SUCCESS,
-    FETCH_TODOS_ERROR,
+    ADD_TODO = 'add_todo',
+    SET_TODOS = 'set_todos',
+    FETCH_TODOS_SUCCESS = 'fetch_todos_success',
+    FETCH_TODOS_ERROR = 'fetch_todos_error',
 }
 
 export interface ServerResponse {
@@ -15,7 +15,6 @@ export interface ServerData {
 
 export interface ITodosState {
     todos: any[];
-    todo: any;
     loading: boolean;
     error: null | string;
 }
@@ -38,7 +37,7 @@ interface ISetTodosAction {
 }
 
 export interface ITodosAction {
-    type: number;
+    type: string;
     payload?: any;
 }
 

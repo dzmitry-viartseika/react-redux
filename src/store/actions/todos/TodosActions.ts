@@ -5,13 +5,15 @@ import axios from 'axios';
 export function setTodos() {
     return async (dispatch: Dispatch<ITodosAction>) => {
         try {
-            axios.get<ServerResponse>(`https://jsonplaceholder.typicode.com/users/1/todos`)
+            axios.get<ServerResponse>(`https://jsonplaceholder.typicode.com/todos`)
                 .then((response) => {
                 if (Array.isArray(response.data)) {
-                    dispatch({
-                        type: TodosActions.SET_TODOS,
-                        payload: response.data,
-                    })
+                    setTimeout(() => {
+                        dispatch({
+                            type: TodosActions.SET_TODOS,
+                            payload: response.data,
+                        })
+                    }, 500)
                 }
 
             })
@@ -19,7 +21,7 @@ export function setTodos() {
             console.error(e);
             dispatch({
                 type: TodosActions.FETCH_TODOS_ERROR,
-                payload: 'Произошла ошибка при загрузке пользователей'
+                payload: 'Произошла ошибка при загрузке дел'
             })
         }
     }

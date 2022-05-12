@@ -3,12 +3,11 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import {useDispatch} from "react-redux";
 import {UserActions} from "../model/users/users";
-import UserActionCreators from '../store/actions/'
 
 function UsersPage(): JSX.Element {
     const [value, setValue] = useState<string>('');
-    const { users, error, loading } = useTypedSelector(state => state.users);
-    const { setUsers } = useActions(UserActionCreators);
+    const { users, error, loading } = useTypedSelector(state => state.user);
+    const { setUsers } = useActions();
     const dispatch = useDispatch();
 
     const handleValue = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -28,9 +27,8 @@ function UsersPage(): JSX.Element {
     }
 
     useEffect(() => {
-        if (!users.length) {
-            setUsers()
-        }
+        console.log('USERS PAGE')
+        setUsers()
     }, [])
     return (
         <>

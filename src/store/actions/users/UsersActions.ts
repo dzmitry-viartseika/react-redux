@@ -31,10 +31,6 @@ export function setUsers() {
             })
         }
     }
-    // return {
-    //     type: UserActions.SET_USERS,
-    //     payload: users
-    // }
 }
 
 export function getAllUsers(users: IUser) {

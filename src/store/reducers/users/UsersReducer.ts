@@ -15,9 +15,10 @@ export const UsersReducer = (state = initialState, action: IUserAction): IUserSt
                 users: [...state.users, payload],
             }
         case UserActions.SET_USERS:
+            console.log('SET_USERS', payload);
             return {
                 ...state,
-                users: [...state.users, ...payload],
+                users: payload,
             }
         case UserActions.FETCH_USERS_SUCCESS:
             return {

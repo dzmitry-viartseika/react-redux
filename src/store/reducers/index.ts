@@ -3,8 +3,8 @@ import { UsersReducer } from './users/UsersReducer';
 import {TodosReducer} from "./todos/TodosReducer";
 
 export const rootReducer = combineReducers({
-    users: UsersReducer,
-    todos: TodosReducer,
+    user: UsersReducer,
+    todo: TodosReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>

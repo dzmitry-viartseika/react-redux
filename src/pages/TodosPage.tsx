@@ -3,13 +3,13 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import {useDispatch} from "react-redux";
 import {TodosActions, ITodo} from "../model/todos/todos";
-import TodosActionCreators from '../store/actions/'
 
 function TodosPage(): JSX.Element {
     const [value, setValue] = useState<string>('');
-    const { todos, error, loading } = useTypedSelector(state => state.todos);
-    const { setTodos } = useActions(TodosActionCreators);
+    const { todos } = useTypedSelector(state => state.todo);
+    const { setTodos } = useActions();
     const dispatch = useDispatch();
+    const pages: number[] = [1, 2, 3, 4, 5];
 
     const handleValue = (e: ChangeEvent<HTMLInputElement>): void => {
         const { target: { value } } = e;
@@ -30,24 +30,30 @@ function TodosPage(): JSX.Element {
     }
 
     useEffect(() => {
-        if (!todos.length) {
-            setTodos()
-        }
+        console.log('TODOS PAGE')
+        setTodos()
     }, [])
 
     return (
         <>
             <h1>Todos</h1>
-            value={value}
             <input type="text" value={value} onChange={handleValue}/>
             <div>
                 { !todos.length ? <h1>Клиенты отсутствуют</h1> : todos.map((todo: ITodo) => (
                     <div key={todo.id}>
-                        user={todo.title}
+                        {todo.title}
                     </div>
                 ))}
             </div>
             <button onClick={addNewTodo}>Add Todo</button>
+            <hr/>
+            <div style={{display: "flex"}}>
+                {pages.map(p =>
+                    <div key={p}>
+                        {p}
+                    </div>
+                )}
+            </div>
         </>
     )
 }
