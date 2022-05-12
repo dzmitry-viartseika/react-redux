@@ -15,7 +15,6 @@ export const TodosReducer = (state = initialState, action: TodosAction): ITodosS
                 todos: [...state.todos, payload],
             }
         case TodosActions.SET_TODOS:
-            console.log('SET_TODOS', payload);
             return {
                 ...state,
                 todos: payload,
