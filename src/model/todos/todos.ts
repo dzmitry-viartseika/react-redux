@@ -14,7 +14,7 @@ export interface ServerData {
 }
 
 export interface ITodosState {
-    todos: any[];
+    todos: ITodo[];
     loading: boolean;
     error: null | string;
 }
