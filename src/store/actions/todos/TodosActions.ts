@@ -9,10 +9,7 @@ export function setTodos() {
                 .then((response) => {
                 if (Array.isArray(response.data)) {
                     setTimeout(() => {
-                        dispatch({
-                            type: TodosActions.SET_TODOS,
-                            payload: response.data,
-                        })
+                        dispatch(setTodosAction(response.data))
                     }, 500)
                 }
 
@@ -27,9 +24,7 @@ export function setTodos() {
     }
 }
 
-export function getAllTodos(todos: ITodo) {
-    return {
-        type: TodosActions.ADD_TODO,
-        payload: todos
-    }
-}
+const setTodosAction = (data: any): ITodosAction => ({
+    type: TodosActions.SET_TODOS,
+    payload: data,
+});
