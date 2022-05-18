@@ -6,14 +6,15 @@ function PostsPage(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // setInterval(() => {
-        //     console.log('set', new Date());
-        //     dispatch({
-        //         type: 'SET_FAKE',
-        //         payload: new Date()
-        //     })
-        // }, 1000)
-    })
+        console.log('render')
+        setInterval(() => {
+            console.log('set', new Date());
+            dispatch({
+                type: 'SET_FAKE',
+                payload: new Date()
+            })
+        }, 1000)
+    }, [])
     return (
         <div>
             <h1>Posts</h1>

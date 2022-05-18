@@ -1,12 +1,13 @@
 import {ChangeEvent, useEffect, useState} from "react";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {UserActions} from "../model/users/users";
+import {getUsers, getUsersSuperSelector} from "../store/selectors/selectors";
 
 function UsersPage(): JSX.Element {
     const [value, setValue] = useState<string>('');
-    const { users, error, loading } = useTypedSelector(state => state.user);
+    const { users, error, loading } = useSelector(getUsersSuperSelector);
     const { setUsers } = useActions();
     const dispatch = useDispatch();
 
