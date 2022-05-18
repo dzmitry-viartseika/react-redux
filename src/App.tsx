@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './assets/scss/style.scss'
 import {Route, Routes} from 'react-router-dom';
 import SharedLayout from "./layouts/SharedLayout";
@@ -11,6 +11,7 @@ import DashboardPage from "./pages/DashboardPage";
 import TodosPage from "./pages/TodosPage";
 
 function App() {
+
     return (
         <>
             <div>
